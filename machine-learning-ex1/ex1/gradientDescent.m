@@ -22,7 +22,8 @@ for iter = 1:num_iters
     % NON vectorized version ;)
     % as X(:,1) is always equals to 1 I jsut did not add it
     t1 = theta(1) - alpha * (1/m) * sum((X * theta) - y)
-    
+
+    % don't forget element wise operation with . for .*
     t2 = theta(2) - alpha * (1/m) * sum(((X * theta) - y) .* X(:,2))
 
     theta(1) = t1
