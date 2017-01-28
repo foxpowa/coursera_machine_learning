@@ -1,3 +1,3 @@
 # coursera machine learning
 
-All ma excercise for coursera machine learning MOOC with Andrew Ng
+All my excercises for coursera machine learning MOOC with Andrew Ng
