@@ -47,15 +47,7 @@ theta_temp(1) = 0;
 
 % adding regularization
 J += sum((lambda / (2 * m)) * (theta_temp .^ 2));
-grad = (lambda / m) .* theta_temp;
-
-
-
-
-
-
-
-
+grad += (lambda / m) .* theta_temp;
 
 % =============================================================
 
