@@ -59,7 +59,7 @@ for c=1:num_labels
   % Use y == c let us send only "true" for class of THIS iteration (c)
   [theta] = ...
   	fmincg(@(t)(lrCostFunction(t, X, (y == c), lambda)), initial_theta, options);
-    % set the c-th col of all_theta matrix to previously calculated theta ;) 
+    % set the c-th row of all_theta matrix to previously calculated theta ;) 
     all_theta(c,:) = theta;
 
 end
