@@ -54,10 +54,13 @@ initial_theta = zeros(n + 1, 1);
 % Set Options
 options = optimset('GradObj', 'on', 'MaxIter', 50);
 
-for i=1:num_labels
+for c=1:num_labels
   % Optimize
+  % Use y == c let us send only "true" for class of THIS iteration (c)
   [theta] = ...
-  	fmincg(@(t)(lrCostFunction(t, X, y, lambda)), initial_theta, options);
+  	fmincg(@(t)(lrCostFunction(t, X, (y == c), lambda)), initial_theta, options);
+    % set the c-th col of all_theta matrix to previously calculated theta ;) 
+    all_theta(c,:) = theta;
 
 end
 
