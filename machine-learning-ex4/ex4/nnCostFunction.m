@@ -58,7 +58,16 @@ for i=1:m
 end
 
 % regularization
-J+ = (lambda / 2 * m) * sum(sum(Theta1(2,:) .^ 2))
+for j=1:hidden_layer_size
+  for k=2:(input_layer_size + 1)
+    J += (lambda / (2 * m)) * (Theta1(j,k) ^ 2);
+  end
+end
+for j=1:num_labels
+  for k=2:(hidden_layer_size + 1)
+    J += (lambda / (2 * m)) * (Theta2(j,k) ^ 2);
+  end
+end
 %
 % Part 2: Implement the backpropagation algorithm to compute the gradients
 %         Theta1_grad and Theta2_grad. You should return the partial derivatives of
