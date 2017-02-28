@@ -40,11 +40,15 @@ Theta2_grad = zeros(size(Theta2));
 %         computed in ex4.m
 
 a1 = [ones(m,1) X];
-hidden_layer = sigmoid(a1 * Theta1');
-hidden_layer = [ones(m,1) hidden_layer];
-output_layer = sigmoid(hidden_layer * Theta2');
+z2 = a1 * Theta1';
 
-h = output_layer;
+a2 = sigmoid(z2);
+a2 = [ones(m,1) a2];
+
+z3 = a2 * Theta2';
+a3 = sigmoid(z3);
+
+h = a3;
 
 for i=1:m
   tmp_y = zeros(num_labels,1);
