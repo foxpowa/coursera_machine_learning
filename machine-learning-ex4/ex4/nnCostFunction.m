@@ -87,6 +87,30 @@ end
 %         Hint: We recommend implementing backpropagation using a for-loop
 %               over the training examples if you are implementing it for the
 %               first time.
+
+for t=1:m
+  % feedforward
+  a_1 = [1 X(t,:)];
+  % a_1 is a 1 * 401 matrix
+
+  z_2 = a_1 * Theta1';
+
+  a_2 = sigmoid(z_2);
+  a_2 = [1 a_2];
+
+  z_3 = a_2 * Theta2';
+  a_3 = sigmoid(z_3);
+
+  % calc of simgas
+  tmp_y = zeros(num_labels,1);
+  tmp_y(y(t)) = 1;
+
+  sigma_3 = (a_3' - tmp_y);
+
+  sigma_2 = (Theta2' * sigma_3) .* sigmoidGradient(z_2);
+
+
+end
 %
 % Part 3: Implement regularization with the cost function and gradients.
 %
