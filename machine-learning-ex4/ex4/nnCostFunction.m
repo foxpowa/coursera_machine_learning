@@ -88,29 +88,18 @@ end
 %               over the training examples if you are implementing it for the
 %               first time.
 
-for t=1:m
-  % feedforward
-  a_1 = [1 X(t,:)];
-  % a_1 is a 1 * 401 matrix
+% 1:10 = 1 2 3 ... 10
+% 1 2 3 ... 10 == y; if y = 1 => 1 0 0 .. 0
+delta_3 = (a3 - ((1:num_labels) == y));
 
-  z_2 = a_1 * Theta1';
+% directly select n - 1 features (after first) with X(:,2:end)
+delta_2 = (delta_3 * Theta2)(:,2:end) .* sigmoidGradient(z2);
 
-  a_2 = sigmoid(z_2);
-  a_2 = [1 a_2];
+% regularized grad
+% adding zeros in Theta1 and 2 will set to 0 reg term when j = 1 (bias unit in forst col)
 
-  z_3 = a_2 * Theta2';
-  a_3 = sigmoid(z_3);
-
-  % calc of simgas
-  tmp_y = zeros(num_labels,1);
-  tmp_y(y(t)) = 1;
-
-  sigma_3 = (a_3' - tmp_y);
-
-  sigma_2 = (Theta2' * sigma_3) .* sigmoidGradient(z_2);
-
-
-end
+Theta1_grad = ((delta_2' * a1) ./ m) + (lambda / m) * [zeros(size(Theta1,1),1) Theta1(:,2:end)];
+Theta2_grad = ((delta_3' * a2) ./ m) + (lambda / m) * [zeros(size(Theta2,1),1) Theta2(:,2:end)];
 %
 % Part 3: Implement regularization with the cost function and gradients.
 %
