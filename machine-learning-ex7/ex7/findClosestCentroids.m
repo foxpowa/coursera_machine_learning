@@ -27,11 +27,14 @@ for i=1:m
   tmp_distortion = 10000000;
   for j=1:K
     % test all centroids
-    k_dist = norm(X(i,:) - centroids(K,:)) ^ 2;
-    if k_dist < tmp_distortion
+    computed_vector = (X(i,:) - centroids(j,:));
+    % k_dist = sum(computed_vector .^ 2);
+    k_dist = norm(computed_vector) ^ 2;
+    if (k_dist < tmp_distortion)
       idx(i) = j;
       tmp_distortion = k_dist;
     end
+    k_dist = 10000000;
   end
 end
 
